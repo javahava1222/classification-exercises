@@ -1,10 +1,11 @@
 #Prep Iris
-def prep_iris(iris):
-    iris = get_iris_data()
-    new_iris = iris.drop(columns=['species_id', 'measurement_id'])
-    new_iris.rename(columns={'species_name':'species'}, inplace=True)
-    dummy_df = pd.get_dummies(new_iris[['species']], dummy_na=False, drop_first=True)
-    df = pd.concat([dummy_df, new_iris], axis =1)
+import pandas as pd
+
+def prep_iris(df):
+    df.drop(columns=['species_id', 'measurement_id'])
+    df.rename(columns={'species_name':'species'}, inplace=True)
+    dummy_df = pd.get_dummies(df[['species']], dummy_na=False, drop_first=True)
+    df = pd.concat([dummy_df, df], axis =1)
     return df
 
 #Prep Titanic
