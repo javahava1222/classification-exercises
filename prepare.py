@@ -1,10 +1,11 @@
 #Prep Iris
 import pandas as pd
+import numpy as np
 
 def prep_iris(df):
-    df.drop(columns=['species_id', 'measurement_id'])
+    df.drop(columns=['species_id', 'measurement_id'], inplace = True)
     df.rename(columns={'species_name':'species'}, inplace=True)
-    dummy_df = pd.get_dummies(df[['species']], dummy_na=False, drop_first=True)
+    dummy_df = pd.get_dummies(df[['species']], dummy_na=False, drop_first=[True])
     df = pd.concat([dummy_df, df], axis =1)
     return df
 
@@ -44,3 +45,4 @@ def prep_telco(telco):
                               'churn']], dummy_na=False, drop_first=True)
     telco = pd.concat([telco, dummy_df], axis=1)
     return telco
+    
